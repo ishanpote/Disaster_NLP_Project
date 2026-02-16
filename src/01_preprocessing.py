@@ -6,7 +6,7 @@ import os
 # --- CONFIGURATION ---
 RAW_DATA_PATH = "../data/raw/"
 PROCESSED_DATA_PATH = "../data/processed/"
-HUMAID_FOLDER = "events_set1"  # Name of your extracted folder inside 'raw'
+HUMAID_FOLDER = "events_set1"  
 
 # Ensure processed directory exists
 os.makedirs(PROCESSED_DATA_PATH, exist_ok=True)
