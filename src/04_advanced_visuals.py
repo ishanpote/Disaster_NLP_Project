@@ -6,8 +6,8 @@ from wordcloud import WordCloud
 from sklearn.feature_extraction.text import CountVectorizer
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
-VISUALS_PATH = "../visuals/"
+PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
+VISUALS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\visuals"
 os.makedirs(VISUALS_PATH, exist_ok=True)
 
 # Load Data
