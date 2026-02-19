@@ -5,7 +5,7 @@ from imblearn.over_sampling import SMOTE
 from collections import Counter
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
+PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
 
 # --- 1. LOAD THE IMBALANCED FEATURES ---
 print("Loading TF-IDF features and labels...")
