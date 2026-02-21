@@ -5,8 +5,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
-MODELS_PATH = "../models/"
+PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
+MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
 
 # Ensure models directory exists
 os.makedirs(MODELS_PATH, exist_ok=True)
