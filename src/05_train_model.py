@@ -4,8 +4,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
-MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
+PROCESSED_DATA_PATH = "../data/processed/"
+MODELS_PATH = "../models/"
 
 # --- 1. LOAD FEATURES (Notice we are loading the SMOTE training data!) ---
 print("Loading balanced features and labels...")
@@ -27,8 +27,8 @@ except FileNotFoundError:
 
 # --- 2. TRAIN MODEL (Logistic Regression) ---
 print("\nTraining Baseline Model (Logistic Regression)...")
-# We no longer need 'class_weight=balanced' because we physically balanced the data!
-model = LogisticRegression(C=1.0, max_iter=1000, multi_class='ovr')
+# Removed 'multi_class' because Scikit-Learn 1.8.0+ handles it automatically!
+model = LogisticRegression(C=1.0, max_iter=1000)
 model.fit(X_train, y_train)
 print("✅ Model Training Complete.")
 
@@ -48,4 +48,4 @@ print("\nSaving trained model...")
 with open(os.path.join(MODELS_PATH, "logistic_regression_model.pkl"), "wb") as f:
     pickle.dump(model, f)
 
-print(f"🚀 Step 3 Complete! Model saved to {MODELS_PATH}")
+print(f"🚀 Step 5 Complete! Model saved to {MODELS_PATH}")
