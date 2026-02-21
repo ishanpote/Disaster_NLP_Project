@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
+PROCESSED_DATA_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\data\processed"
 MODELS_PATH = "../models/"
 
 # --- 1. LOAD FEATURES (Notice we are loading the SMOTE training data!) ---
