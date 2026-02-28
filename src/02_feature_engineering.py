@@ -35,10 +35,11 @@ print(f"Train Set: {len(X_train)} tweets")
 print(f"Test Set:  {len(X_test)} tweets")
 
 # --- 3. TF-IDF VECTORIZATION ---
-print("\nVectorizing text (Converting to numbers)...")
+print("\nVectorizing text (Converting to numbers with Bigrams)...")
 
-# Max_features=5000 means we only keep the top 5,000 most important words
-tfidf = TfidfVectorizer(max_features=5000, stop_words='english')
+# Max_features=5000 means we only keep the top 5,000 most important words/phrases
+# ---> ADDED ngram_range=(1, 2) HERE <---
+tfidf = TfidfVectorizer(max_features=5000, stop_words='english', ngram_range=(1, 2))
 
 # Learn vocabulary from Train data ONLY (to prevent data leakage)
 X_train_tfidf = tfidf.fit_transform(X_train)
