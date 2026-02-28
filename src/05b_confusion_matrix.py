@@ -6,7 +6,7 @@ from sklearn.metrics import confusion_matrix
 
 # --- CONFIGURATION ---
 PROCESSED_DATA_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\data\processed"
-MODELS_PATH = "../models/"
+MODELS_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\models"
 VISUALS_PATH = "../visuals/"
 os.makedirs(VISUALS_PATH, exist_ok=True)
 
