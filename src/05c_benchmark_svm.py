@@ -4,8 +4,8 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report, accuracy_score
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
-MODELS_PATH = "../models/"
+PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
+MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
 
 # --- 1. LOAD BALANCED FEATURES ---
 print("Loading balanced features and labels...")
