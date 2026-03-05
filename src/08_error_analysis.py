@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 
 # --- CONFIGURATION ---
 PROCESSED_DATA_PATH = "E\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
-MODELS_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\models"
+MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
 
 # --- 1. LOAD DATA & MODEL ---
 print("Loading data and model for Error Analysis...")
