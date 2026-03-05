@@ -5,7 +5,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report, accuracy_score
 
 # --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\data\processed"
+PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
 MODELS_PATH = "E:\3rd_year\6SEM\Project\Disaster_NLP_Project\models"
 
 # --- 1. LOAD BALANCED DATA ---
