@@ -111,3 +111,4 @@ You have built an incredibly rigorous foundation. You didn't just train a model;
 
 There are many changes left.
 Changes of phase 2 are not implemented yet.
+We have to think of ideas to implement IOT in this project. 
