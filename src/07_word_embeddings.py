@@ -8,17 +8,18 @@ import nltk
 # Download the tokenizer if not already present
 nltk.download('punkt', quiet=True)
 
-# --- CONFIGURATION ---
-PROCESSED_DATA_PATH = "../data/processed/"
-MODELS_PATH = "../models/"
+# --- CONFIGURATION (BULLETPROOF PATHS) ---
+# This anchors the paths to the exact location of this python file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed/")
+MODELS_PATH = os.path.join(BASE_DIR, "../models/")
 
 print("Loading cleaned text data for Word2Vec training...")
 try:
-    # We need the actual text, not the TF-IDF vectors, so we load the cleaned CSV
     df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text'])
     print("✅ Data Loaded.")
 except FileNotFoundError:
-    print("❌ Error: Cleaned data file not found.")
+    print(f"❌ Error: Could not find humaid_cleaned.csv in {os.path.abspath(PROCESSED_DATA_PATH)}")
     exit()
 
 # --- 1. PREPARE TEXT FOR WORD2VEC ---
@@ -28,9 +29,6 @@ sentences = [str(text).split() for text in df['cleaned_text']]
 
 # --- 2. TRAIN THE WORD2VEC MODEL ---
 print("\nTraining Word2Vec Embeddings (Teaching the AI semantic meaning)...")
-# vector_size=100: Each word gets 100 coordinates to define its meaning
-# window=5: Looks at 5 words before and after to understand context
-# min_count=2: Ignores typos or words that only appear once
 w2v_model = Word2Vec(sentences=sentences, vector_size=100, window=5, min_count=2, workers=4)
 
 print("✅ Word2Vec Training Complete!")
@@ -47,7 +45,6 @@ else:
     print(f"Word '{test_word}' not found in vocabulary.")
 
 # --- 3. SAVE THE MODEL ---
-# We save the actual Word2Vec model so the Deep Learning network can use it later
 model_path = os.path.join(MODELS_PATH, "word2vec_disaster.model")
 w2v_model.save(model_path)
-print(f"\n💾 Semantic dictionary saved to {model_path}!")
+print(f"\n💾 Semantic dictionary saved to {os.path.abspath(model_path)}!")
