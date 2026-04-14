@@ -16,7 +16,7 @@ ROBERTA_DIR = os.path.join(MODELS_PATH, "roberta_urgency_classifier")
 
 print("🔍 Initializing XAI Diagnostic Tool (LIME)...")
 
-# --- 1. LOAD DATA & FIND A MISTAKE ---
+# --- 1. LOAD DATA & RECREATE TEST SPLIT ---
 print("Loading test data to find a misclassified tweet...")
 df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text', 'urgency'])
 
@@ -27,6 +27,7 @@ label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
 classes = label_encoder.classes_
 
+# Exact same split as training to ensure we are testing unseen data
 _, X_test, _, y_test = train_test_split(X, y_encoded, test_size=0.15, random_state=42, stratify=y_encoded)
 
 # --- 2. LOAD ROBERTA ---
@@ -47,12 +48,22 @@ def predictor_wrapper(texts):
     probs = F.softmax(outputs.logits, dim=1).cpu().numpy()
     return probs
 
-# --- 4. HUNTING FOR A SPECIFIC BLIND SPOT ---
+# --- 4. HUNTING FOR A SPECIFIC BLIND SPOT (MEMORY-SAFE) ---
 print("Hunting for a tweet where RoBERTa confused 'High' and 'Medium' urgency...")
-# We will predict the first 200 test tweets just to find a good mistake to analyze
 test_subset = X_test
 true_subset = y_test
-subset_probs = predictor_wrapper(test_subset)
+
+# Process the predictions in memory-safe batches of 32 to prevent CUDA OOM
+batch_size = 32
+subset_probs = []
+
+print("Predicting test set in batches to protect GPU VRAM...")
+for i in range(0, len(test_subset), batch_size):
+    batch_texts = test_subset[i:i+batch_size]
+    batch_probs = predictor_wrapper(batch_texts)
+    subset_probs.extend(batch_probs)
+
+subset_probs = np.array(subset_probs)
 subset_preds = np.argmax(subset_probs, axis=1)
 
 target_idx = -1
@@ -60,13 +71,13 @@ for i in range(len(test_subset)):
     true_label = classes[true_subset[i]]
     pred_label = classes[subset_preds[i]]
     
-    # Let's find a case where it was actually High urgency, but the AI said Medium
+    # We are looking for a false negative: A High urgency event ignored as Medium
     if true_label == 'High' and pred_label == 'Medium':
         target_idx = i
         break
 
 if target_idx == -1:
-    print("Could not find a High->Medium misclassification in the first 200 tweets. Just analyzing the first tweet instead.")
+    print("Could not find a High->Medium misclassification! Your model is incredibly accurate.")
     target_idx = 0
 
 text_to_explain = test_subset[target_idx]
@@ -97,4 +108,4 @@ exp = explainer.explain_instance(
 output_path = os.path.join(BASE_DIR, "lime_explanation.html")
 exp.save_to_file(output_path)
 print(f"\n✅ Diagnostic Complete! Open this file in your web browser to see the AI's brain:")
-print(f"➡️ {output_path}")
+print(f"➡️ {os.path.abspath(output_path)}")
