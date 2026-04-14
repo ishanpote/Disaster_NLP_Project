@@ -1,0 +1,19 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Large ML model artifacts
+models/roberta_urgency_checkpoints/
+models/roberta_urgency_classifier/
+models/*.h5
+models/*.pt
+models/*.pth
+models/*.safetensors
+models/*.bin
+models/*.pkl
+
+# Notebook checkpoints
+.ipynb_checkpoints/

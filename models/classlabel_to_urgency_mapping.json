@@ -1,0 +1,12 @@
+{
+  "caution_and_advice": "Medium",
+  "displaced_people_and_evacuations": "High",
+  "infrastructure_and_utility_damage": "Medium",
+  "injured_or_dead_people": "High",
+  "missing_or_found_people": "High",
+  "not_humanitarian": "Low",
+  "other_relevant_information": "Low",
+  "requests_or_urgent_needs": "High",
+  "rescue_volunteering_or_donation_effort": "Low",
+  "sympathy_and_support": "Low"
+}

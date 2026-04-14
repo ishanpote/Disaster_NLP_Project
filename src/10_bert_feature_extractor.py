@@ -1,83 +1,218 @@
-import pandas as pd
-import numpy as np
 import os
-import pickle
+import json
+import random
+
+import numpy as np
+import pandas as pd
 import torch
-from transformers import DistilBertTokenizer, DistilBertModel
+from datasets import Dataset
+from sklearn.metrics import accuracy_score, f1_score, classification_report
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.utils.class_weight import compute_class_weight
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    DataCollatorWithPadding,
+    EarlyStoppingCallback,
+    Trainer,
+    TrainingArguments,
+)
+
 
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed/")
-MODELS_PATH = os.path.join(BASE_DIR, "../models/")
+PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed")
+MODELS_PATH = os.path.join(BASE_DIR, "../models")
+INPUT_FILE = os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")
 
-print("Loading cleaned dataset...")
-df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text'])
+# Stronger backbone than DistilBERT for better classification quality.
+MODEL_NAME = os.getenv("TRANSFORMER_MODEL", "roberta-base")
+MAX_LENGTH = int(os.getenv("MAX_TOKEN_LENGTH", "128"))
+EPOCHS = int(os.getenv("TRAIN_EPOCHS", "5"))
+SEED = int(os.getenv("TRAIN_SEED", "42"))
+SAMPLE_SIZE = int(os.getenv("SAMPLE_SIZE", "0"))
+USE_CLASS_LABEL_MAPPING = False
 
-# To keep processing time reasonable on a local machine, we will sample the dataset
-# If you have a powerful GPU, you can remove the .sample() to run on the full dataset
-print("Sampling data for local BERT processing...")
-df_sample = df.sample(n=10000, random_state=42) 
-X_text = df_sample['cleaned_text'].astype(str).tolist()
-y = df_sample['urgency'].tolist()
 
-# --- 1. LOAD PRE-TRAINED BERT ---
-print("\nDownloading/Loading Pre-trained DistilBERT Model from Hugging Face...")
-# We use DistilBERT because it is 60% faster but retains 97% of BERT's language understanding
-tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
-bert_model = DistilBertModel.from_pretrained('distilbert-base-uncased')
+def set_seed(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
-# Check for GPU (CUDA) to speed up processing
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-bert_model = bert_model.to(device)
-print(f"✅ BERT Model loaded successfully on: {device}")
 
-# --- 2. EXTRACT CONTEXTUAL EMBEDDINGS ---
-print("\nTranslating tweets into 768-dimensional BERT vectors (This will take a few minutes)...")
-def get_bert_embeddings(texts):
-    # Tokenize the text and pad it to the exact same length
-    encoded_input = tokenizer(texts, padding=True, truncation=True, max_length=128, return_tensors='pt').to(device)
-    
-    with torch.no_grad(): # Disable gradient calculation for feature extraction
-        output = bert_model(**encoded_input)
-    
-    # We only take the [CLS] token (the first token), which acts as a summary of the entire sentence
-    return output.last_hidden_state[:, 0, :].cpu().numpy()
+class WeightedLossTrainer(Trainer):
+    def __init__(self, class_weights: torch.Tensor, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.class_weights = class_weights
 
-# Process in batches to prevent computer crashes from memory overload
-batch_size = 100
-X_features = []
-total_batches = len(X_text) // batch_size + 1
+    def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
+        labels = inputs.get("labels")
+        outputs = model(
+            input_ids=inputs.get("input_ids"),
+            attention_mask=inputs.get("attention_mask"),
+        )
+        logits = outputs.get("logits")
+        loss_fn = torch.nn.CrossEntropyLoss(weight=self.class_weights.to(logits.device))
+        loss = loss_fn(logits.view(-1, model.config.num_labels), labels.view(-1))
+        return (loss, outputs) if return_outputs else loss
 
-for i in range(0, len(X_text), batch_size):
-    batch_texts = X_text[i:i+batch_size]
-    batch_embeddings = get_bert_embeddings(batch_texts)
-    X_features.append(batch_embeddings)
-    if (i // batch_size) % 10 == 0:
-        print(f"Processed batch {i // batch_size} of {total_batches}...")
 
-X_features = np.vstack(X_features)
-print("✅ Contextual Embeddings Generated!")
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    preds = np.argmax(logits, axis=1)
+    return {
+        "accuracy": accuracy_score(labels, preds),
+        "f1_weighted": f1_score(labels, preds, average="weighted"),
+        "f1_macro": f1_score(labels, preds, average="macro"),
+    }
 
-# --- 3. TRAIN PHASE 1 CHAMPION (LOGISTIC REGRESSION) ---
-print("\nTraining Phase 1 Champion model using new BERT Brain...")
-X_train, X_test, y_train, y_test = train_test_split(X_features, y, test_size=0.2, random_state=42, stratify=y)
 
-# We use class_weight='balanced' instead of SMOTE for cleaner architecture
-log_reg = LogisticRegression(max_iter=2000, class_weight='balanced')
-log_reg.fit(X_train, y_train)
+def tokenize_function(examples, tokenizer):
+    return tokenizer(examples["text"], truncation=True, max_length=MAX_LENGTH)
 
-# --- 4. EVALUATE ---
-print("\nEvaluating BERT + Logistic Regression Hybrid...")
-y_pred = log_reg.predict(X_test)
 
-print(f"\n🚀 BERT Hybrid Overall Accuracy: {accuracy_score(y_test, y_pred):.2%}")
-print("\n--- Detailed Classification Report ---")
-print(classification_report(y_test, y_pred))
+def main():
+    set_seed(SEED)
+    os.makedirs(MODELS_PATH, exist_ok=True)
 
-# Save the model and the embeddings for later
-with open(os.path.join(MODELS_PATH, "bert_logreg_model.pkl"), "wb") as f:
-    pickle.dump(log_reg, f)
-print("\n💾 Model saved successfully!")
+    print("Loading cleaned dataset...")
+    raw_df = pd.read_csv(INPUT_FILE).dropna(subset=["cleaned_text", "urgency"])
+
+    if USE_CLASS_LABEL_MAPPING and "class_label" in raw_df.columns:
+        class_to_urgency = (
+            raw_df[["class_label", "urgency"]]
+            .dropna()
+            .drop_duplicates()
+            .groupby("class_label")["urgency"]
+            .agg(lambda values: values.mode().iloc[0])
+            .to_dict()
+        )
+
+        mapped = raw_df["class_label"].map(class_to_urgency)
+        mapping_acc = accuracy_score(raw_df["urgency"], mapped)
+
+        print("\nRule-based class_label -> urgency mapping accuracy:")
+        print(f"Overall Accuracy: {mapping_acc:.2%}")
+        print("Detailed Classification Report:")
+        print(classification_report(raw_df["urgency"], mapped, zero_division=0))
+
+        mapping_out = os.path.join(MODELS_PATH, "classlabel_to_urgency_mapping.json")
+        with open(mapping_out, "w", encoding="utf-8") as f:
+            json.dump(class_to_urgency, f, indent=2)
+
+        print(f"\nSaved deterministic mapping to: {mapping_out}")
+        print("Set USE_CLASS_LABEL_MAPPING=0 to force text-only transformer training.")
+        return
+
+    df = raw_df[["cleaned_text", "urgency"]].rename(columns={"cleaned_text": "text", "urgency": "label"})
+
+    if SAMPLE_SIZE > 0 and SAMPLE_SIZE < len(df):
+        df = df.sample(n=SAMPLE_SIZE, random_state=SEED)
+        print(f"Using sampled rows: {len(df)}")
+
+    # Label encoding for transformer training.
+    classes = sorted(df["label"].unique().tolist())
+    label2id = {label: idx for idx, label in enumerate(classes)}
+    id2label = {idx: label for label, idx in label2id.items()}
+    df["label"] = df["label"].map(label2id)
+
+    # Train / validation / test split with stratification.
+    train_df, test_df = train_test_split(df, test_size=0.15, random_state=SEED, stratify=df["label"])
+    train_df, val_df = train_test_split(
+        train_df,
+        test_size=0.15,
+        random_state=SEED,
+        stratify=train_df["label"],
+    )
+
+    print(f"Train rows: {len(train_df)} | Val rows: {len(val_df)} | Test rows: {len(test_df)}")
+    print("Loading tokenizer and model...")
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModelForSequenceClassification.from_pretrained(
+        MODEL_NAME,
+        num_labels=len(classes),
+        id2label=id2label,
+        label2id=label2id,
+    )
+
+    train_ds = Dataset.from_pandas(train_df.reset_index(drop=True))
+    val_ds = Dataset.from_pandas(val_df.reset_index(drop=True))
+    test_ds = Dataset.from_pandas(test_df.reset_index(drop=True))
+
+    train_ds = train_ds.map(lambda x: tokenize_function(x, tokenizer), batched=True)
+    val_ds = val_ds.map(lambda x: tokenize_function(x, tokenizer), batched=True)
+    test_ds = test_ds.map(lambda x: tokenize_function(x, tokenizer), batched=True)
+
+    columns = ["input_ids", "attention_mask", "label"]
+    train_ds.set_format(type="torch", columns=columns)
+    val_ds.set_format(type="torch", columns=columns)
+    test_ds.set_format(type="torch", columns=columns)
+
+    # Compute class weights to reduce majority-class bias.
+    class_weights = compute_class_weight(
+        class_weight="balanced",
+        classes=np.array(sorted(train_df["label"].unique())),
+        y=train_df["label"].values,
+    )
+    class_weights = torch.tensor(class_weights, dtype=torch.float)
+
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+
+    use_cuda = torch.cuda.is_available()
+    training_args = TrainingArguments(
+        output_dir=os.path.join(MODELS_PATH, "roberta_urgency_checkpoints"),
+        eval_strategy="epoch",
+        save_strategy="epoch",
+        learning_rate=2e-5,
+        per_device_train_batch_size=16 if use_cuda else 8,
+        per_device_eval_batch_size=32 if use_cuda else 16,
+        num_train_epochs=EPOCHS,
+        weight_decay=0.01,
+        load_best_model_at_end=True,
+        metric_for_best_model="accuracy",
+        greater_is_better=True,
+        fp16=use_cuda,
+        logging_steps=100,
+        report_to="none",
+        seed=SEED,
+    )
+
+    trainer = WeightedLossTrainer(
+        class_weights=class_weights,
+        model=model,
+        args=training_args,
+        train_dataset=train_ds,
+        eval_dataset=val_ds,
+        tokenizer=tokenizer,
+        data_collator=data_collator,
+        compute_metrics=compute_metrics,
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=2)],
+    )
+
+    print("\nTraining RoBERTa classifier...")
+    trainer.train()
+
+    print("\nEvaluating best checkpoint on holdout test set...")
+    preds = trainer.predict(test_ds)
+    y_true = test_df["label"].to_numpy()
+    y_pred = np.argmax(preds.predictions, axis=1)
+
+    acc = accuracy_score(y_true, y_pred)
+    print(f"\nOverall Test Accuracy: {acc:.2%}")
+    print("\nDetailed Classification Report:")
+    print(classification_report(y_true, y_pred, target_names=classes))
+
+    final_model_dir = os.path.join(MODELS_PATH, "roberta_urgency_classifier")
+    trainer.save_model(final_model_dir)
+    tokenizer.save_pretrained(final_model_dir)
+
+    with open(os.path.join(final_model_dir, "label_mapping.json"), "w", encoding="utf-8") as f:
+        json.dump({"label2id": label2id, "id2label": id2label}, f, indent=2)
+
+    print(f"\nSaved model and tokenizer to: {final_model_dir}")
+
+
+if __name__ == "__main__":
+    main()
