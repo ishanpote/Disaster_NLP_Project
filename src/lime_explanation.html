@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divDQY0EKE6RYJ6F1J"></div>
+        <div class="lime top_div" id="top_divX73JW42SGI01WAQ"></div>
         
         <script>
-        var top_div = d3.select('#top_divDQY0EKE6RYJ6F1J').classed('lime top_div', true);
+        var top_div = d3.select('#top_divX73JW42SGI01WAQ').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["High", "Low", "Medium"], [0.007336448412388563, 0.6283143758773804, 0.36434921622276306]);
+            var pp = new lime.PredictProba(pp_svg, ["High", "Low", "Medium"], [0.018098853528499603, 0.23344217240810394, 0.7484589219093323]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["High", "Low", "Medium"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["destruction", -0.2854030640927113], ["the", -0.06975893049652997], ["hard", -0.06420734086737173], ["and", 0.0639767524862659], ["believe", 0.0546341663432782], ["she", 0.05327063082317951], ["gorgeous", 0.04787382731490288], ["sunset", -0.025296630951857402], ["makes", 0.02100033280718896], ["irma", -0.01419181088022678]], 1, exp_div);
+                exp.show([["no", 0.5177236721494205], ["electricity", 0.3999400404382969], ["service", 0.05429518976389383], ["ice", -0.05015284204777338], ["since", -0.04622222011844932], ["water", -0.034582154106347414], ["phone", 0.028006252411028058], ["hurricanemaria", -0.019086184501647774], ["internet", 0.013049680786945038], ["tuesday", -0.010453147835002266]], 2, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_text([["destruction", 74, -0.2854030640927113], ["the", 70, -0.06975893049652997], ["hard", 45, -0.06420734086737173], ["and", 66, 0.0639767524862659], ["believe", 53, 0.0546341663432782], ["she", 86, 0.05327063082317951], ["gorgeous", 7, 0.04787382731490288], ["sunset", 16, -0.025296630951857402], ["makes", 36, 0.02100033280718896], ["irma", 61, -0.01419181088022678]], 1, "such a gorgeous sunset this evening makes it hard to believe irma and the destruction she", raw_div, true);
+            exp.show_raw_text([["no", 0, 0.5177236721494205], ["electricity", 3, 0.3999400404382969], ["service", 44, 0.05429518976389383], ["ice", 34, -0.05015284204777338], ["since", 52, -0.04622222011844932], ["water", 15, -0.034582154106347414], ["phone", 38, 0.028006252411028058], ["hurricanemaria", 66, -0.019086184501647774], ["internet", 21, 0.013049680786945038], ["tuesday", 58, -0.010453147835002266]], 2, "no electricity water internet gas ice phone service since tuesday hurricanemaria", raw_div, true);
             
         </script>
         </body></html>
