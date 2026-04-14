@@ -113,3 +113,13 @@ There are many changes left.
 Changes of phase 2 are not implemented yet.
 We have to think of ideas to implement IOT in this project. 
 That IOT can be implemented in phase 2.
+
+## Recent Work
+
+The latest updates to the project focused on making the explainability and evaluation flow usable in the current environment:
+
+- Added explainable AI support in `src/12_explainable_ai.py` using LIME for local interpretation of urgency predictions.
+- Added threshold optimization in `src/14_threshold_optimizer.py` to tune the decision boundary for better high-urgency recall.
+- Installed `lime` into the active Python 3.11 interpreter so the explainability script runs in the same environment as the rest of the project.
+- Identified a CUDA out-of-memory issue in the LIME inference path, which will need batching or CPU fallback in the next code pass.
+- Kept large model artifacts out of version control so the repository remains pushable and lightweight.
