@@ -50,8 +50,8 @@ def predictor_wrapper(texts):
 # --- 4. HUNTING FOR A SPECIFIC BLIND SPOT ---
 print("Hunting for a tweet where RoBERTa confused 'High' and 'Medium' urgency...")
 # We will predict the first 200 test tweets just to find a good mistake to analyze
-test_subset = X_test[:200]
-true_subset = y_test[:200]
+test_subset = X_test
+true_subset = y_test
 subset_probs = predictor_wrapper(test_subset)
 subset_preds = np.argmax(subset_probs, axis=1)
 
