@@ -204,7 +204,7 @@ def main():
     print("\nDetailed Classification Report:")
     print(classification_report(y_true, y_pred, target_names=classes))
 
-    final_model_dir = os.path.join(MODELS_PATH, "roberta_urgency_classifier")
+    final_model_dir = os.path.join(MODELS_PATH, "roberta_urgency_seed123")
     trainer.save_model(final_model_dir)
     tokenizer.save_pretrained(final_model_dir)
 
