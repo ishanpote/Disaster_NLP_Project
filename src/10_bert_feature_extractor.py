@@ -29,7 +29,7 @@ INPUT_FILE = os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")
 MODEL_NAME = os.getenv("TRANSFORMER_MODEL", "roberta-base")
 MAX_LENGTH = int(os.getenv("MAX_TOKEN_LENGTH", "128"))
 EPOCHS = int(os.getenv("TRAIN_EPOCHS", "5"))
-SEED = int(os.getenv("TRAIN_SEED", "42"))
+SEED = int(os.getenv("TRAIN_SEED", "123"))
 SAMPLE_SIZE = int(os.getenv("SAMPLE_SIZE", "0"))
 USE_CLASS_LABEL_MAPPING = False
 
