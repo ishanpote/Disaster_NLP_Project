@@ -5,6 +5,25 @@ __pycache__/
 venv/
 env/
 
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+.python-version
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build/distribution artifacts
+build/
+dist/
+*.egg-info/
+
 # Large ML model artifacts
 models/roberta_urgency_checkpoints/
 models/roberta_urgency_classifier/
@@ -14,6 +33,24 @@ models/*.pth
 models/*.safetensors
 models/*.bin
 models/*.pkl
+
+# Experiment tracking and logs
+wandb/
+runs/
+lightning_logs/
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
 # Notebook checkpoints
 .ipynb_checkpoints/
