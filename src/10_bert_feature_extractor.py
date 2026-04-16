@@ -29,7 +29,7 @@ INPUT_FILE = os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")
 MODEL_NAME = os.getenv("TRANSFORMER_MODEL", "roberta-base")
 MAX_LENGTH = int(os.getenv("MAX_TOKEN_LENGTH", "128"))
 EPOCHS = int(os.getenv("TRAIN_EPOCHS", "5"))
-SEED = int(os.getenv("TRAIN_SEED", "123"))
+SEED = int(os.getenv("TRAIN_SEED", "456"))
 SAMPLE_SIZE = int(os.getenv("SAMPLE_SIZE", "0"))
 USE_CLASS_LABEL_MAPPING = False
 
@@ -204,7 +204,7 @@ def main():
     print("\nDetailed Classification Report:")
     print(classification_report(y_true, y_pred, target_names=classes))
 
-    final_model_dir = os.path.join(MODELS_PATH, "roberta_urgency_seed123")
+    final_model_dir = os.path.join(MODELS_PATH, "roberta_urgency_seed456")
     trainer.save_model(final_model_dir)
     tokenizer.save_pretrained(final_model_dir)
 
