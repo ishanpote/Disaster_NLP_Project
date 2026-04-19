@@ -1,5 +1,4 @@
-﻿# Disaster NLP Project
-
+﻿
 Disaster NLP Project is an end-to-end urgency classification system for disaster-related tweets. It maps tweets into three operational priorities:
 
 - High: immediate life/safety risk
