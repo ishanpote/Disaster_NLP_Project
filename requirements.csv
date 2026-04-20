@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+imbalanced-learn
+matplotlib
+seaborn
+textblob
+wordcloud
+gensim
+nltk
+tensorflow
+torch
+transformers
+datasets
+xgboost
+lime
