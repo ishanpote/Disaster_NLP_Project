@@ -26,6 +26,8 @@ Disaster_NLP_Project/
 |     |- kaggle_cleaned.csv
 |     |- X_train_tfidf.pkl
 |     |- X_test_tfidf.pkl
+|     |- y_train.pkl
+|     |- y_test.pkl
 |     |- X_train_tfidf_smote.pkl
 |     |- y_train_smote.pkl
 |     |- misclassified_tweets.csv
@@ -33,6 +35,10 @@ Disaster_NLP_Project/
 |- models/
 |  |- logistic_regression_model.pkl
 |  |- tfidf_vectorizer.pkl
+|  |- svm_model.pkl
+|  |- bert_logreg_model.pkl
+|  |- dl_tokenizer.pkl
+|  |- dl_label_encoder.pkl
 |  |- word2vec_disaster.model
 |  |- hybrid_cnn_bilstm.h5
 |  |- roberta_urgency_*/
@@ -57,13 +63,15 @@ python -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-`requirements.csv` is currently empty, so install the required packages directly:
+`requirements.csv` currently exists but is empty, so install the required packages directly:
 
 ```bash
 pip install pandas numpy scikit-learn imbalanced-learn matplotlib seaborn \
             textblob wordcloud gensim nltk tensorflow torch transformers \
             datasets xgboost lime
 ```
+
+Optional cleanup: rename `requirements.csv` to `requirements.txt` and pin package versions for reproducible environments.
 
 If `textblob` or `nltk` resources are missing at runtime, download corpora/tokenizers when prompted.
 
