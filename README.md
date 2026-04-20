@@ -63,15 +63,13 @@ python -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-`requirements.csv` currently exists but is empty, so install the required packages directly:
+Install dependencies from `requirements.txt`:
 
 ```bash
-pip install pandas numpy scikit-learn imbalanced-learn matplotlib seaborn \
-            textblob wordcloud gensim nltk tensorflow torch transformers \
-            datasets xgboost lime
+pip install -r requirements.txt
 ```
 
-Optional cleanup: rename `requirements.csv` to `requirements.txt` and pin package versions for reproducible environments.
+You can optionally pin exact versions over time for fully reproducible environments.
 
 If `textblob` or `nltk` resources are missing at runtime, download corpora/tokenizers when prompted.
 
