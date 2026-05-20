@@ -8,7 +8,6 @@ RAW_DATA_PATH = "../data/raw/"
 PROCESSED_DATA_PATH = "../data/processed/"
 HUMAID_FOLDER = "events_set1"  
 
-# Ensure processed directory exists
 os.makedirs(PROCESSED_DATA_PATH, exist_ok=True)
 
 # --- 1. TEXT CLEANING FUNCTION ---
