@@ -49,7 +49,6 @@ print("Processing Kaggle Data...")
 try:
     df_kaggle = pd.read_csv(os.path.join(RAW_DATA_PATH, "train.csv"))
     df_kaggle['cleaned_text'] = df_kaggle['text'].apply(clean_text)
-    # Save only what we need
     df_kaggle[['id', 'cleaned_text', 'target']].to_csv(
         os.path.join(PROCESSED_DATA_PATH, "kaggle_cleaned.csv"), index=False
     )
