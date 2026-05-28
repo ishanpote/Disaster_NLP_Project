@@ -3,7 +3,6 @@ import glob
 import re
 import os
 
-# --- CONFIGURATION ---
 RAW_DATA_PATH = "../data/raw/"
 PROCESSED_DATA_PATH = "../data/processed/"
 HUMAID_FOLDER = "events_set1"  
