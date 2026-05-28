@@ -63,7 +63,6 @@ all_files = glob.glob(search_path, recursive=True)
 if all_files:
     df_humaid = pd.concat((pd.read_csv(f, sep='\t') for f in all_files), ignore_index=True)
     
-    # Apply Cleaning
     df_humaid['cleaned_text'] = df_humaid['tweet_text'].apply(clean_text)
     
     # Apply Urgency Mapping
