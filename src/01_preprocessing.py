@@ -65,7 +65,6 @@ if all_files:
     
     df_humaid['cleaned_text'] = df_humaid['tweet_text'].apply(clean_text)
     
-    # Apply Urgency Mapping
     df_humaid['urgency'] = df_humaid['class_label'].apply(map_urgency)
     
     # Save final version
