@@ -12,9 +12,9 @@ os.makedirs(PROCESSED_DATA_PATH, exist_ok=True)
 # --- 1. TEXT CLEANING FUNCTION ---
 def clean_text(text):
     if not isinstance(text, str): return ""
-    text = text.lower()  # Lowercase
-    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)  # Remove URLs
-    text = re.sub(r'@\w+', '', text)  # Remove mentions (@user)
+    text = text.lower()  
+    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE) 
+    text = re.sub(r'@\w+', '', text)  
     text = re.sub(r'#', '', text)  # Remove hashtag symbol (keep the word)
     text = re.sub(r'[^\w\s]', '', text)  # Remove punctuation
     text = re.sub(r'\s+', ' ', text).strip()  # Remove extra spaces
