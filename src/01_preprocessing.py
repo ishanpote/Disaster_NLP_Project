@@ -15,9 +15,9 @@ def clean_text(text):
     text = text.lower()  
     text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE) 
     text = re.sub(r'@\w+', '', text)  
-    text = re.sub(r'#', '', text)  # Remove hashtag symbol (keep the word)
-    text = re.sub(r'[^\w\s]', '', text)  # Remove punctuation
-    text = re.sub(r'\s+', ' ', text).strip()  # Remove extra spaces
+    text = re.sub(r'#', '', text) 
+    text = re.sub(r'[^\w\s]', '', text)  
+    text = re.sub(r'\s+', ' ', text).strip() 
     return text
 
 # --- 2. URGENCY MAPPING LOGIC ---
