@@ -41,7 +41,7 @@ def map_urgency(label):
     elif label in medium_labels:
         return 'Medium'
     else:
-        return 'Low'  # Includes volunteering, sympathy, not_humanitarian
+        return 'Low'  
 
 # --- 3. PROCESS KAGGLE DATA (Noise Filter) ---
 print("Processing Kaggle Data...")
