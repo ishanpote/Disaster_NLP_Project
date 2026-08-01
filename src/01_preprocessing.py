@@ -67,7 +67,6 @@ if all_files:
     
     df_humaid['urgency'] = df_humaid['class_label'].apply(map_urgency)
     
-    # Save final version
     df_humaid[['tweet_id', 'cleaned_text', 'class_label', 'urgency']].to_csv(
         os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv"), index=False
     )
