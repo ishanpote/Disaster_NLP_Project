@@ -72,7 +72,6 @@ if all_files:
     )
     print(f"✅ Saved humaid_cleaned.csv ({len(df_humaid)} rows)")
     
-    # Show distribution
     print("\n--- Urgency Distribution ---")
     print(df_humaid['urgency'].value_counts())
 else:
