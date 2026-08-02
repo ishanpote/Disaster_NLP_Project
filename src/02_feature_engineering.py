@@ -43,7 +43,7 @@ tfidf = TfidfVectorizer(max_features=5000, stop_words='english', ngram_range=(1,
 
 # Learn vocabulary from Train data ONLY (to prevent data leakage)
 X_train_tfidf = tfidf.fit_transform(X_train)
-# Just transform the Test data
+
 X_test_tfidf = tfidf.transform(X_test)
 
 print(f"✅ Vectorization Complete. Shape: {X_train_tfidf.shape}")
