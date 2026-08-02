@@ -15,7 +15,7 @@ os.makedirs(MODELS_PATH, exist_ok=True)
 print("Loading processed data...")
 try:
     df_humaid = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv"))
-    # Drop rows where text might be empty after cleaning
+    
     df_humaid = df_humaid.dropna(subset=['cleaned_text'])
     print(f"✅ Loaded HumAID Data: {len(df_humaid)} rows")
 except FileNotFoundError:
