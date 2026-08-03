@@ -23,7 +23,7 @@ except FileNotFoundError:
 print("Generating Urgency Distribution Chart...")
 plt.figure(figsize=(8, 6))
 
-colors = ['#2ca02c', '#ff7f0e', '#d62728'] # Green (Low), Orange (Medium), Red (High)
+colors = ['#2ca02c', '#ff7f0e', '#d62728'] 
 urgency_counts = df['urgency'].value_counts()
 
 # Ensure the order is Low, Medium, High for the chart
