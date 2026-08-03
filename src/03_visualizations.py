@@ -26,7 +26,6 @@ plt.figure(figsize=(8, 6))
 colors = ['#2ca02c', '#ff7f0e', '#d62728'] 
 urgency_counts = df['urgency'].value_counts()
 
-# Ensure the order is Low, Medium, High for the chart
 urgency_counts = urgency_counts[['Low', 'Medium', 'High']]
 
 urgency_counts.plot(kind='bar', color=colors, edgecolor='black')
