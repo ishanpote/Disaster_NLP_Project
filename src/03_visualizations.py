@@ -48,7 +48,6 @@ print("Generating Top Words Chart for High Urgency...")
 high_urgency_text = " ".join(df[df['urgency'] == 'High']['cleaned_text'])
 words = high_urgency_text.split()
 
-# Remove standard stop words that might have slipped through
 stop_words = {'the', 'to', 'and', 'in', 'of', 'for', 'a', 'is', 'on', 'at', 'this', 'we', 'are', 'you', 'with', 'from', 'it'}
 filtered_words = [word for word in words if word not in stop_words and len(word) > 2]
 
