@@ -7,7 +7,6 @@ from collections import Counter
 PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
 VISUALS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\visuals"
 
-# Create a folder to save your graphs
 os.makedirs(VISUALS_PATH, exist_ok=True)
 
 # --- 1. LOAD DATA ---
