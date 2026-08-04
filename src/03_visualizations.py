@@ -63,7 +63,6 @@ plt.ylabel('Frequency', fontsize=12)
 plt.xticks(rotation=45, ha='right', fontsize=11)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 
-# Save the plot
 words_path = os.path.join(VISUALS_PATH, 'high_urgency_words.png')
 plt.tight_layout()
 plt.savefig(words_path, dpi=300)
