@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import os
 from collections import Counter
 
-# --- CONFIGURATION ---
 PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\processed"
 VISUALS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\visuals"
 
