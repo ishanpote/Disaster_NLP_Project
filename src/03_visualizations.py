@@ -34,7 +34,6 @@ plt.ylabel('Number of Tweets', fontsize=12)
 plt.xticks(rotation=0, fontsize=11)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 
-# Save the plot
 dist_path = os.path.join(VISUALS_PATH, 'urgency_distribution.png')
 plt.tight_layout()
 plt.savefig(dist_path, dpi=300) # High resolution for presentations
