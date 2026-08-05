@@ -49,7 +49,6 @@ words = high_urgency_text.split()
 stop_words = {'the', 'to', 'and', 'in', 'of', 'for', 'a', 'is', 'on', 'at', 'this', 'we', 'are', 'you', 'with', 'from', 'it'}
 filtered_words = [word for word in words if word not in stop_words and len(word) > 2]
 
-# Count frequencies
 word_counts = Counter(filtered_words)
 common_words = word_counts.most_common(15) # Get top 15 words
 
