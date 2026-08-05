@@ -50,7 +50,7 @@ stop_words = {'the', 'to', 'and', 'in', 'of', 'for', 'a', 'is', 'on', 'at', 'thi
 filtered_words = [word for word in words if word not in stop_words and len(word) > 2]
 
 word_counts = Counter(filtered_words)
-common_words = word_counts.most_common(15) # Get top 15 words
+common_words = word_counts.most_common(15) 
 
 words_df = pd.DataFrame(common_words, columns=['Word', 'Frequency'])
 
