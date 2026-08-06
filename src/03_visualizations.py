@@ -42,7 +42,6 @@ print(f"✅ Saved chart to: {dist_path}")
 # --- 3. PLOT 2: TOP WORDS IN HIGH URGENCY TWEETS ---
 print("Generating Top Words Chart for High Urgency...")
 
-# Get only High Urgency text
 high_urgency_text = " ".join(df[df['urgency'] == 'High']['cleaned_text'])
 words = high_urgency_text.split()
 
