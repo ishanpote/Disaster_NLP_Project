@@ -10,7 +10,6 @@ PROCESSED_DATA_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\data\\
 VISUALS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\visuals"
 os.makedirs(VISUALS_PATH, exist_ok=True)
 
-# Load Data
 print("Loading data for advanced insights...")
 df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv"))
 df = df.dropna(subset=['cleaned_text'])
