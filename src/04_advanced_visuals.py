@@ -26,7 +26,6 @@ plt.savefig(os.path.join(VISUALS_PATH, "class_breakdown.png"), dpi=300)
 
 # --- INSIGHT 2: TWEET LENGTH BY URGENCY ---
 print("2. Generating Tweet Length Analysis...")
-# Calculate word count for each tweet
 df['word_count'] = df['cleaned_text'].apply(lambda x: len(str(x).split()))
 
 plt.figure(figsize=(8, 6))
