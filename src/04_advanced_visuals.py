@@ -66,7 +66,6 @@ def generate_wordcloud(text_data, filename, colormap):
     plt.savefig(os.path.join(VISUALS_PATH, filename), dpi=300)
     plt.close()
 
-# Generate for High Urgency (Red theme)
 generate_wordcloud(df[df['urgency'] == 'High']['cleaned_text'], "wordcloud_high_urgency.png", 'Reds')
 # Generate for Low Urgency (Green theme)
 generate_wordcloud(df[df['urgency'] == 'Low']['cleaned_text'], "wordcloud_low_urgency.png", 'Greens')
