@@ -12,7 +12,7 @@ print("Loading balanced features and labels...")
 try:
     with open(os.path.join(PROCESSED_DATA_PATH, "X_train_tfidf_smote.pkl"), "rb") as f:
         X_train = pickle.load(f)
-    # We test on the ORIGINAL, untouched test set
+
     with open(os.path.join(PROCESSED_DATA_PATH, "X_test_tfidf.pkl"), "rb") as f:
         X_test = pickle.load(f)
         
