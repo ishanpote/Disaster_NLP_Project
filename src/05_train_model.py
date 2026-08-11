@@ -27,7 +27,6 @@ except FileNotFoundError:
 
 # --- 2. TRAIN MODEL (Logistic Regression) ---
 print("\nTraining Baseline Model (Logistic Regression)...")
-# Removed 'multi_class' because Scikit-Learn 1.8.0+ handles it automatically!
 model = LogisticRegression(C=1.0, max_iter=1000)
 model.fit(X_train, y_train)
 print("✅ Model Training Complete.")
