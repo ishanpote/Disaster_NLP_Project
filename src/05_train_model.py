@@ -39,7 +39,6 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f"\n🏆 Overall Model Accuracy: {accuracy:.2%}")
 
 print("\n--- Detailed Classification Report ---")
-# This prints Precision, Recall, and F1-Score as required by your Problem Statement
 print(classification_report(y_test, y_pred))
 
 # --- 4. SAVE MODEL ---
