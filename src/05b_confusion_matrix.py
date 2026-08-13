@@ -31,7 +31,7 @@ classes = model.classes_
 
 # --- 3. CREATE CONFUSION MATRIX ---
 print("Generating visual Confusion Matrix...")
-# This calculates the exact numbers of true positives, false positives, etc.
+
 cm = confusion_matrix(y_test, y_pred, labels=classes)
 
 # --- 4. PLOT AND SAVE ---
