@@ -36,7 +36,7 @@ cm = confusion_matrix(y_test, y_pred, labels=classes)
 
 # --- 4. PLOT AND SAVE ---
 plt.figure(figsize=(8, 6))
-# We use 'Blues' color map. annot=True puts the numbers inside the boxes, fmt='d' makes them integers
+
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
             xticklabels=classes, yticklabels=classes, 
             linewidths=1, linecolor='black')
