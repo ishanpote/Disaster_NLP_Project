@@ -25,7 +25,7 @@ except FileNotFoundError:
 
 # --- 2. TRAIN SVM MODEL ---
 print("\nTraining Benchmark Model (Linear Support Vector Machine)...")
-# LinearSVC is incredibly fast and optimized for text classification
+
 svm_model = LinearSVC(C=1.0, max_iter=2000, random_state=42)
 svm_model.fit(X_train, y_train)
 print("✅ SVM Training Complete.")
