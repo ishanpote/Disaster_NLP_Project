@@ -40,7 +40,7 @@ print(classification_report(y_test, y_pred_nb))
 # --- 3. TRAIN RANDOM FOREST ---
 print("\n" + "="*50)
 print("Training Model 2: Random Forest (This might take a minute)...")
-# We use 100 trees (n_estimators=100) and n_jobs=-1 to use all CPU cores for speed
+
 rf_model = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
 rf_model.fit(X_train, y_train)
 
