@@ -2,7 +2,6 @@ import pickle
 import re
 import os
 
-# --- CONFIGURATION ---
 MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
 
 # --- 1. LOAD MODEL & VECTORIZER ---
