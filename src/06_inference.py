@@ -35,11 +35,9 @@ while True:
         print("Ending demo. Goodbye!")
         break
     
-    # Process the input
     cleaned_input = clean_text(user_input)
     vectorized_input = tfidf.transform([cleaned_input]) # MUST be an array
     
-    # Predict Class and Probabilities
     prediction = model.predict(vectorized_input)[0]
     probabilities = model.predict_proba(vectorized_input)[0]
     classes = model.classes_
