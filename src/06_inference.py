@@ -36,7 +36,7 @@ while True:
         break
     
     cleaned_input = clean_text(user_input)
-    vectorized_input = tfidf.transform([cleaned_input]) # MUST be an array
+    vectorized_input = tfidf.transform([cleaned_input])
     
     prediction = model.predict(vectorized_input)[0]
     probabilities = model.predict_proba(vectorized_input)[0]
