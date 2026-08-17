@@ -42,7 +42,6 @@ while True:
     probabilities = model.predict_proba(vectorized_input)[0]
     classes = model.classes_
     
-    # Display Results
     print(f"🚨 AI Classification: **{prediction.upper()} URGENCY**")
     print("Confidence Scores:")
     for cls, prob in zip(classes, probabilities):
