@@ -30,7 +30,6 @@ w2v_model = Word2Vec(sentences=sentences, vector_size=100, window=5, min_count=2
 
 print("✅ Word2Vec Training Complete!")
 
-# Let's test the AI's new brain!
 print("\n--- AI Semantic Understanding Test ---")
 test_word = "water"
 if test_word in w2v_model.wv:
