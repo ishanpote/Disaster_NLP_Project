@@ -5,7 +5,6 @@ from gensim.models import Word2Vec
 from nltk.tokenize import word_tokenize
 import nltk
 
-# Download the tokenizer if not already present
 nltk.download('punkt', quiet=True)
 
 # --- CONFIGURATION (BULLETPROOF PATHS) ---
