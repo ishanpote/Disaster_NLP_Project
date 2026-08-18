@@ -7,8 +7,6 @@ import nltk
 
 nltk.download('punkt', quiet=True)
 
-# --- CONFIGURATION (BULLETPROOF PATHS) ---
-# This anchors the paths to the exact location of this python file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed/")
 MODELS_PATH = os.path.join(BASE_DIR, "../models/")
