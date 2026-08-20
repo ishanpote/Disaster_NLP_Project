@@ -8,7 +8,7 @@ MODELS_PATH = "E:\\3rd_year\\6SEM\\Project\\Disaster_NLP_Project\\models"
 
 # --- 1. LOAD DATA & MODEL ---
 print("Loading data and model for Error Analysis...")
-# Load the original text so we can read the actual tweets
+
 df_humaid = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text'])
 
 # We use the exact same random_state=42 to guarantee we get the exact same test set back!
