@@ -27,7 +27,6 @@ y_pred = model.predict(X_test_tfidf)
 
 # --- 3. FIND THE MISTAKES ---
 print("Isolating misclassifications...")
-# Create a DataFrame to compare everything side-by-side
 results_df = pd.DataFrame({
     'Tweet_Text': X_test_text,
     'Actual_Urgency': y_test,
