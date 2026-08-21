@@ -11,7 +11,6 @@ print("Loading data and model for Error Analysis...")
 
 df_humaid = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text'])
 
-# We use the exact same random_state=42 to guarantee we get the exact same test set back!
 X_train_text, X_test_text, y_train, y_test = train_test_split(
     df_humaid['cleaned_text'], df_humaid['urgency'], 
     test_size=0.2, random_state=42, stratify=df_humaid['urgency']
