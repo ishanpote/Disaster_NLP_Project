@@ -16,7 +16,6 @@ X_train_text, X_test_text, y_train, y_test = train_test_split(
     test_size=0.2, random_state=42, stratify=df_humaid['urgency']
 )
 
-# Load the test features and the trained model
 with open(os.path.join(PROCESSED_DATA_PATH, "X_test_tfidf.pkl"), "rb") as f:
     X_test_tfidf = pickle.load(f)
 with open(os.path.join(MODELS_PATH, "logistic_regression_model.pkl"), "rb") as f:
