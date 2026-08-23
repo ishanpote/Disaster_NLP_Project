@@ -33,7 +33,6 @@ results_df = pd.DataFrame({
     'Predicted_Urgency': y_pred
 })
 
-# Filter the DataFrame to only keep rows where the AI guessed wrong
 errors_df = results_df[results_df['Actual_Urgency'] != results_df['Predicted_Urgency']]
 
 # Specifically isolate the most dangerous errors: Actual High, Predicted Low
