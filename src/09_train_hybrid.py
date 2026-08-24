@@ -16,7 +16,7 @@ from gensim.models import Word2Vec
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed/")
 MODELS_PATH = os.path.join(BASE_DIR, "../models/")
-MAX_SEQUENCE_LENGTH = 50 # Max words per tweet
+MAX_SEQUENCE_LENGTH = 50
 
 print("Loading data and Word2Vec dictionary...")
 df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text'])
