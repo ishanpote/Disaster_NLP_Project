@@ -27,7 +27,6 @@ print("Tokenizing and padding sequences...")
 X = df['cleaned_text'].astype(str).tolist()
 y = df['urgency'].tolist()
 
-# Encode labels (High=0, Low=1, Medium=2)
 label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
 
