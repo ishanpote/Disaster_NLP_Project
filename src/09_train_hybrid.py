@@ -30,7 +30,6 @@ y = df['urgency'].tolist()
 label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
 
-# Split data
 X_train_text, X_test_text, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded)
 
 # Tokenize text for Neural Network
