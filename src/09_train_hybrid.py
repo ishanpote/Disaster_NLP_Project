@@ -32,7 +32,6 @@ y_encoded = label_encoder.fit_transform(y)
 
 X_train_text, X_test_text, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded)
 
-# Tokenize text for Neural Network
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(X_train_text)
 vocab_size = len(tokenizer.word_index) + 1
