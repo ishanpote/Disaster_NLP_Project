@@ -57,7 +57,6 @@ model = Sequential([
     Embedding(input_dim=vocab_size, output_dim=100, weights=[embedding_matrix], 
               input_length=MAX_SEQUENCE_LENGTH, trainable=False),
     
-    # Layer 2: The Keyword Sniper (CNN)
     Conv1D(filters=64, kernel_size=3, activation='relu'),
     MaxPooling1D(pool_size=2),
     
