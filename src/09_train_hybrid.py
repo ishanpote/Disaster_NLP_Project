@@ -53,7 +53,7 @@ class_weight_dict = dict(enumerate(class_weights))
 # --- 4. BUILD THE HYBRID CNN-BiLSTM MODEL ---
 print("\nConstructing Hybrid CNN-BiLSTM Architecture...")
 model = Sequential([
-    # Layer 1: The AI Dictionary (Frozen weights from Word2Vec)
+    
     Embedding(input_dim=vocab_size, output_dim=100, weights=[embedding_matrix], 
               input_length=MAX_SEQUENCE_LENGTH, trainable=False),
     
