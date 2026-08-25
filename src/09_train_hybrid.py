@@ -36,7 +36,6 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(X_train_text)
 vocab_size = len(tokenizer.word_index) + 1
 
-# Pad sequences so every tweet is exactly 50 words long
 X_train_pad = pad_sequences(tokenizer.texts_to_sequences(X_train_text), maxlen=MAX_SEQUENCE_LENGTH)
 X_test_pad = pad_sequences(tokenizer.texts_to_sequences(X_test_text), maxlen=MAX_SEQUENCE_LENGTH)
 
