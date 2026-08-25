@@ -47,7 +47,6 @@ for word, i in tokenizer.word_index.items():
         embedding_matrix[i] = w2v_model.wv[word]
 
 # --- 3. CLASS WEIGHTS (Fixing Imbalance) ---
-# Deep Learning handles imbalance better with weights than SMOTE
 class_weights = compute_class_weight(class_weight='balanced', classes=np.unique(y_train), y=y_train)
 class_weight_dict = dict(enumerate(class_weights))
 
