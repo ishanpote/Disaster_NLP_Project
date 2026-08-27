@@ -59,8 +59,7 @@ model = Sequential([
     
     Conv1D(filters=64, kernel_size=3, activation='relu'),
     MaxPooling1D(pool_size=2),
-    
-    # Layer 3: The Context Reader (BiLSTM)
+
     Bidirectional(LSTM(64, return_sequences=False)),
     Dropout(0.5), # Prevents overfitting
     
