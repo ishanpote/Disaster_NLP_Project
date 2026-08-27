@@ -63,7 +63,6 @@ model = Sequential([
     Bidirectional(LSTM(64, return_sequences=False)),
     Dropout(0.5), # Prevents overfitting
     
-    # Layer 4: The Decision Maker
     Dense(32, activation='relu'),
     Dense(3, activation='softmax') # 3 output nodes for High, Medium, Low
 ])
