@@ -64,7 +64,7 @@ model = Sequential([
     Dropout(0.5), 
     
     Dense(32, activation='relu'),
-    Dense(3, activation='softmax') # 3 output nodes for High, Medium, Low
+    Dense(3, activation='softmax') 
 ])
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
