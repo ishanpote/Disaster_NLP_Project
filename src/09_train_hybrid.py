@@ -41,7 +41,7 @@ X_test_pad = pad_sequences(tokenizer.texts_to_sequences(X_test_text), maxlen=MAX
 
 # --- 2. CREATE EMBEDDING MATRIX ---
 print("Mapping Word2Vec vectors to Neural Network weights...")
-embedding_matrix = np.zeros((vocab_size, 100)) # 100 is the vector_size from our Word2Vec model
+embedding_matrix = np.zeros((vocab_size, 100)) 
 for word, i in tokenizer.word_index.items():
     if word in w2v_model.wv:
         embedding_matrix[i] = w2v_model.wv[word]
