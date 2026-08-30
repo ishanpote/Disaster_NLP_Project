@@ -85,7 +85,6 @@ print("\n--- Detailed Classification Report ---")
 target_names = label_encoder.inverse_transform([0, 1, 2])
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-# Save artifacts
 model.save(os.path.join(MODELS_PATH, "hybrid_cnn_bilstm.h5"))
 with open(os.path.join(MODELS_PATH, "dl_tokenizer.pkl"), "wb") as f:
     pickle.dump(tokenizer, f)
