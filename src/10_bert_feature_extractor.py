@@ -24,7 +24,6 @@ PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed")
 MODELS_PATH = os.path.join(BASE_DIR, "../models")
 INPUT_FILE = os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")
 
-# Stronger backbone than DistilBERT for better classification quality.
 MODEL_NAME = os.getenv("TRANSFORMER_MODEL", "roberta-base")
 MAX_LENGTH = int(os.getenv("MAX_TOKEN_LENGTH", "128"))
 EPOCHS = int(os.getenv("TRAIN_EPOCHS", "5"))
