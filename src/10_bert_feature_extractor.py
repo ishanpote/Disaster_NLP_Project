@@ -110,7 +110,6 @@ def main():
         df = df.sample(n=SAMPLE_SIZE, random_state=SEED)
         print(f"Using sampled rows: {len(df)}")
 
-    # Label encoding for transformer training.
     classes = sorted(df["label"].unique().tolist())
     label2id = {label: idx for idx, label in enumerate(classes)}
     id2label = {idx: label for label, idx in label2id.items()}
