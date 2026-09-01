@@ -115,7 +115,6 @@ def main():
     id2label = {idx: label for label, idx in label2id.items()}
     df["label"] = df["label"].map(label2id)
 
-    # Train / validation / test split with stratification.
     train_df, test_df = train_test_split(df, test_size=0.15, random_state=SEED, stratify=df["label"])
     train_df, val_df = train_test_split(
         train_df,
