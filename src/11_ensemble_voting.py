@@ -14,7 +14,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed")
 MODELS_PATH = os.path.join(BASE_DIR, "../models")
 
-# Define the paths to your 3 different brains
 ROBERTA_DIR = os.path.join(MODELS_PATH, "roberta_urgency_classifier")
 CNN_MODEL_PATH = os.path.join(MODELS_PATH, "hybrid_cnn_bilstm.h5")
 CNN_TOKENIZER_PATH = os.path.join(MODELS_PATH, "dl_tokenizer.pkl")
