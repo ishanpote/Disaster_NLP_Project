@@ -146,7 +146,6 @@ def main():
     val_ds.set_format(type="torch", columns=columns)
     test_ds.set_format(type="torch", columns=columns)
 
-    # Compute class weights to reduce majority-class bias.
     class_weights = compute_class_weight(
         class_weight="balanced",
         classes=np.array(sorted(train_df["label"].unique())),
