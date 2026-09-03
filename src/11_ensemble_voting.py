@@ -17,7 +17,7 @@ MODELS_PATH = os.path.join(BASE_DIR, "../models")
 ROBERTA_DIR = os.path.join(MODELS_PATH, "roberta_urgency_classifier")
 CNN_MODEL_PATH = os.path.join(MODELS_PATH, "hybrid_cnn_bilstm.h5")
 CNN_TOKENIZER_PATH = os.path.join(MODELS_PATH, "dl_tokenizer.pkl")
-LOGREG_MODEL_PATH = os.path.join(MODELS_PATH, "logistic_regression_model.pkl") # Update if your Phase 1 name is different
+LOGREG_MODEL_PATH = os.path.join(MODELS_PATH, "logistic_regression_model.pkl")
 TFIDF_PATH = os.path.join(MODELS_PATH, "tfidf_vectorizer.pkl")    # Update if your Phase 1 name is different
 
 print("🚀 Initializing the Ensemble 'Meta-Model'...")
