@@ -26,7 +26,6 @@ print("🚀 Initializing the Ensemble 'Meta-Model'...")
 print("Loading the test dataset...")
 df = pd.read_csv(os.path.join(PROCESSED_DATA_PATH, "humaid_cleaned.csv")).dropna(subset=['cleaned_text', 'urgency'])
 
-# Recreate the EXACT same test split you used in your previous scripts
 X = df['cleaned_text'].astype(str).tolist()
 y = df['urgency'].tolist()
 
