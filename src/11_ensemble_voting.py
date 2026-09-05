@@ -33,7 +33,6 @@ label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
 _, X_test, _, y_test = train_test_split(X, y_encoded, test_size=0.15, random_state=42, stratify=y_encoded)
 
-# Prepare an array to hold the probabilities from each model
 ensemble_probs = np.zeros((len(X_test), 3))
 active_models = 0
 
