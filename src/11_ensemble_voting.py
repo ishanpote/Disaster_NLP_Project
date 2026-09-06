@@ -54,7 +54,7 @@ if os.path.exists(ROBERTA_DIR):
             batch_texts = X_test[i:i+batch_size]
             inputs = tokenizer_rob(batch_texts, truncation=True, padding=True, max_length=128, return_tensors="pt").to(device)
             outputs = model_rob(**inputs)
-            # Convert logits to probabilities using Softmax
+
             probs = torch.nn.functional.softmax(outputs.logits, dim=-1).cpu().numpy()
             rob_probs.extend(probs)
             
