@@ -72,7 +72,7 @@ if os.path.exists(CNN_MODEL_PATH) and os.path.exists(CNN_TOKENIZER_PATH):
     
     print("Gathering CNN-BiLSTM's predictions...")
     X_test_seq = tokenizer_cnn.texts_to_sequences(X_test)
-    X_test_pad = pad_sequences(X_test_seq, maxlen=50) # Must match the maxlen from script 09
+    X_test_pad = pad_sequences(X_test_seq, maxlen=50) 
     
     cnn_probs = model_cnn.predict(X_test_pad, verbose=0)
     ensemble_probs += cnn_probs * 0.25
