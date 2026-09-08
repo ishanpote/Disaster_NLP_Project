@@ -106,7 +106,6 @@ print(f"\n✅ Aggregated votes from {active_models} models.")
 
 ensemble_probs = ensemble_probs / np.sum(ensemble_probs, axis=1, keepdims=True)
 
-# The final prediction is the class with the highest combined probability
 y_pred_ensemble = np.argmax(ensemble_probs, axis=1)
 
 print("\n" + "="*50)
