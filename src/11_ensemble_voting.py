@@ -104,7 +104,6 @@ if active_models == 0:
 
 print(f"\n✅ Aggregated votes from {active_models} models.")
 
-# Normalize probabilities if some models were missing
 ensemble_probs = ensemble_probs / np.sum(ensemble_probs, axis=1, keepdims=True)
 
 # The final prediction is the class with the highest combined probability
