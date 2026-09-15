@@ -26,7 +26,6 @@ label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(y)
 classes = label_encoder.classes_
 
-# Exact same split as training to ensure we are testing unseen data
 _, X_test, _, y_test = train_test_split(X, y_encoded, test_size=0.15, random_state=42, stratify=y_encoded)
 
 # --- 2. LOAD ROBERTA ---
