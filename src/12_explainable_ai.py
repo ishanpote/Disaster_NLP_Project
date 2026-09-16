@@ -41,7 +41,6 @@ def predictor_wrapper(texts):
     inputs = tokenizer(texts, return_tensors="pt", padding=True, truncation=True, max_length=128).to(device)
     with torch.no_grad():
         outputs = model(**inputs)
-    # Convert logits to probabilities
     probs = F.softmax(outputs.logits, dim=1).cpu().numpy()
     return probs
 
