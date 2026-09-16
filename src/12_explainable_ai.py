@@ -37,7 +37,6 @@ model.to(device)
 model.eval()
 
 # --- 3. LIME PREDICTION FUNCTION ---
-# LIME needs a specific function that takes raw text and returns probabilities
 def predictor_wrapper(texts):
     inputs = tokenizer(texts, return_tensors="pt", padding=True, truncation=True, max_length=128).to(device)
     with torch.no_grad():
