@@ -49,7 +49,6 @@ print("Hunting for a tweet where RoBERTa confused 'High' and 'Medium' urgency...
 test_subset = X_test
 true_subset = y_test
 
-# Process the predictions in memory-safe batches of 32 to prevent CUDA OOM
 batch_size = 32
 subset_probs = []
 
