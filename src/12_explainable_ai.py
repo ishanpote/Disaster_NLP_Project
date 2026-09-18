@@ -90,7 +90,6 @@ print("="*50)
 print("\nGenerating visual explanation... (Running 500 perturbations)")
 explainer = LimeTextExplainer(class_names=classes)
 
-# We ask LIME to explain the prediction for the specific label RoBERTa *actually* guessed
 exp = explainer.explain_instance(
     text_to_explain, 
     predictor_wrapper, 
