@@ -35,7 +35,6 @@ y_encoded = label_encoder.fit_transform(y)
 _, X_test, _, y_test = train_test_split(X, y_encoded, test_size=0.15, random_state=42, stratify=y_encoded)
 
 # --- 2. EXTRACT PREDICTIONS (THE BASE MODELS) ---
-# We need to collect the probability outputs from all 3 models to feed into XGBoost
 meta_features = []
 
 # RoBERTa Probabilities
