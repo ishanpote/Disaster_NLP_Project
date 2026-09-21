@@ -37,7 +37,6 @@ _, X_test, _, y_test = train_test_split(X, y_encoded, test_size=0.15, random_sta
 # --- 2. EXTRACT PREDICTIONS (THE BASE MODELS) ---
 meta_features = []
 
-# RoBERTa Probabilities
 print("\n🧠 Extracting probabilities from RoBERTa...")
 tokenizer_rob = AutoTokenizer.from_pretrained(ROBERTA_DIR)
 model_rob = AutoModelForSequenceClassification.from_pretrained(ROBERTA_DIR)
