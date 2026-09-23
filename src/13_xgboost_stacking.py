@@ -63,7 +63,6 @@ X_test_pad = pad_sequences(X_test_seq, maxlen=50)
 cnn_probs = model_cnn.predict(X_test_pad, verbose=0)
 meta_features.append(cnn_probs)
 
-# Logistic Regression Probabilities
 print("🧠 Extracting probabilities from Logistic Regression...")
 with open(LOGREG_MODEL_PATH, 'rb') as f:
     model_logreg = pickle.load(f)
