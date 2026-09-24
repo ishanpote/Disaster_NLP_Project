@@ -75,7 +75,6 @@ meta_features.append(logreg_probs)
 # --- 3. THE LIME FIX: RESOURCE SCARCITY ENGINEERED FEATURE ---
 print("⚙️ Injecting Rule-Based Feature: Resource Scarcity Count...")
 def count_scarcity(text):
-    # Keywords that indicate cascading infrastructure failure
     keywords = ['no electricity', 'water', 'internet', 'gas', 'ice', 'phone', 'service', 'power', 'food', 'trapped', 'stranded']
     text_lower = text.lower()
     return sum(1 for word in keywords if word in text_lower)
