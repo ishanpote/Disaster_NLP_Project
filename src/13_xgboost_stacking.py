@@ -82,7 +82,6 @@ def count_scarcity(text):
 scarcity_counts = np.array([count_scarcity(text) for text in X_test]).reshape(-1, 1)
 meta_features.append(scarcity_counts)
 
-# Combine everything into the final Meta-Dataset (10 columns: 3+3+3+1)
 X_meta = np.hstack(meta_features)
 
 # --- 4. TRAIN THE META-MODEL (XGBOOST) ---
