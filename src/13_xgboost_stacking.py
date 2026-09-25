@@ -88,7 +88,6 @@ X_meta = np.hstack(meta_features)
 print("\n🔥 Training XGBoost Meta-Model...")
 X_meta_train, X_meta_test, y_meta_train, y_meta_test = train_test_split(X_meta, y_test, test_size=0.3, random_state=42, stratify=y_test)
 
-# Configure XGBoost to correct the mistakes of the base models
 xgb_model = xgb.XGBClassifier(
     n_estimators=150,
     max_depth=4,
