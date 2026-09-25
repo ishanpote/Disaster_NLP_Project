@@ -86,7 +86,6 @@ X_meta = np.hstack(meta_features)
 
 # --- 4. TRAIN THE META-MODEL (XGBOOST) ---
 print("\n🔥 Training XGBoost Meta-Model...")
-# We split the test set into a meta-train and meta-test to evaluate XGBoost fairly
 X_meta_train, X_meta_test, y_meta_train, y_meta_test = train_test_split(X_meta, y_test, test_size=0.3, random_state=42, stratify=y_test)
 
 # Configure XGBoost to correct the mistakes of the base models
