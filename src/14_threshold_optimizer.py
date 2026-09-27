@@ -10,7 +10,6 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-# --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROCESSED_DATA_PATH = os.path.join(BASE_DIR, "../data/processed")
 MODELS_PATH = os.path.join(BASE_DIR, "../models")
