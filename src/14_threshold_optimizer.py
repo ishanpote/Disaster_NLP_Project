@@ -53,7 +53,6 @@ with torch.no_grad():
         rob_probs.extend(probs)
 meta_features.append(np.array(rob_probs))
 
-# CNN-BiLSTM
 model_cnn = tf.keras.models.load_model(CNN_MODEL_PATH)
 with open(CNN_TOKENIZER_PATH, 'rb') as f:
     tokenizer_cnn = pickle.load(f)
