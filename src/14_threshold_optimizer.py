@@ -65,7 +65,6 @@ with open(TFIDF_PATH, 'rb') as f:
     tfidf = pickle.load(f)
 meta_features.append(model_logreg.predict_proba(tfidf.transform(X_test)))
 
-# Scarcity Count
 def count_scarcity(text):
     keywords = ['no electricity', 'water', 'internet', 'gas', 'ice', 'phone', 'service', 'power', 'food', 'trapped', 'stranded']
     return sum(1 for word in keywords if word in text.lower())
