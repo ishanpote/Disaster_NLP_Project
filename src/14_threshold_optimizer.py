@@ -59,7 +59,6 @@ with open(CNN_TOKENIZER_PATH, 'rb') as f:
 X_test_pad = pad_sequences(tokenizer_cnn.texts_to_sequences(X_test), maxlen=50) 
 meta_features.append(model_cnn.predict(X_test_pad, verbose=0))
 
-# LogReg
 with open(LOGREG_MODEL_PATH, 'rb') as f:
     model_logreg = pickle.load(f)
 with open(TFIDF_PATH, 'rb') as f:
