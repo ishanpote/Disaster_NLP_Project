@@ -85,7 +85,6 @@ print("\n⚙️ Sweeping 3,375 weight combinations to find the >90% sweet spot..
 best_acc = 0
 best_weights = None
 
-# Test weights from 0.5x to 2.0x for each of the 3 classes
 for w_0 in np.arange(0.5, 2.0, 0.1):
     for w_1 in np.arange(0.5, 2.0, 0.1):
         for w_2 in np.arange(0.5, 2.0, 0.1):
