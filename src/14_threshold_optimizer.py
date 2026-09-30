@@ -92,7 +92,6 @@ for w_0 in np.arange(0.5, 2.0, 0.1):
             
             weighted_probs = xgb_raw_probs * weights
             
-            # Make predictions based on the newly weighted probabilities
             preds = np.argmax(weighted_probs, axis=1)
             
             acc = accuracy_score(y_meta_test, preds)
