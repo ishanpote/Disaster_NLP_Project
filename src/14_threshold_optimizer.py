@@ -90,7 +90,6 @@ for w_0 in np.arange(0.5, 2.0, 0.1):
         for w_2 in np.arange(0.5, 2.0, 0.1):
             weights = np.array([w_0, w_1, w_2])
             
-            # Multiply raw probabilities by the test weights
             weighted_probs = xgb_raw_probs * weights
             
             # Make predictions based on the newly weighted probabilities
